@@ -14,8 +14,9 @@ class Orders extends Migration
     public function up()
     {
         Schema::create('orders', function(Blueprint $table) {
-            $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('pastry_id');
+            $table->unsignedInteger('client_id');
+            $table->unsignedInteger('pastry_id');
+            $table->unsignedInteger('quantity');
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('pastry_id')->references('id')->on('pastries');
