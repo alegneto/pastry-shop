@@ -16,5 +16,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\ClientRepositoryInterface', 'App\Repositories\ClientRepositoryEloquente'
         );
+
+        $this->app->bind(
+            'App\Repositories\PastryRepositoryInterface', 'App\Repositories\PastryRepositoryEloquente'
+        );
     }
 }

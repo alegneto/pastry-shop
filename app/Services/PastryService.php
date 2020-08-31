@@ -2,27 +2,27 @@
 
 namespace App\Services;
 
-use App\Repositories\ClientRepositoryInterface;
+use App\Repositories\PastryRepositoryInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ClientService
+class PastryService
 {
-    private $clientRepository;
+    private $pastryRepository;
 
-    public function __construct(ClientRepositoryInterface $clientRepository)
+    public function __construct(PastryRepositoryInterface $pastryRepository)
     {
-        $this->clientRepository = $clientRepository;
+        $this->pastryRepository = $pastryRepository;
     }
 
     public function getAll()
     {
         try {
-            $clients = $this->clientRepository->getAll();
+            $pastries = $this->pastryRepository->getAll();
 
-            if (count($clients) > 0) {
-                return response()->json($clients, Response::HTTP_OK);
+            if (count($pastries) > 0) {
+                return response()->json($pastries, Response::HTTP_OK);
             } else {
                 return response()->json([], Response::HTTP_OK);
             }
@@ -34,10 +34,10 @@ class ClientService
     public function get($id)
     {
         try {
-            $client = $this->clientRepository->get($id);
+            $pastry = $this->pastryRepository->get($id);
 
-            if (!empty($client->id)) {
-                return response()->json($client, Response::HTTP_OK);
+            if (!empty($pastry->id)) {
+                return response()->json($pastry, Response::HTTP_OK);
             } else {
                 return response()->json([], Response::HTTP_OK);
             }
@@ -49,8 +49,8 @@ class ClientService
     public function store(Request $request)
     {
         try {
-            $client = $this->clientRepository->create($request);
-            return response()->json($client, Response::HTTP_CREATED);
+            $pastry = $this->pastryRepository->create($request);
+            return response()->json($pastry, Response::HTTP_CREATED);
         } catch (QueryException $e) {
             return response()->json(['error' => 'Database error connection'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -59,8 +59,8 @@ class ClientService
     public function update($id, Request $request)
     {
         try {
-            $client = $this->clientRepository->update($id, $request);
-            return response()->json($client, Response::HTTP_OK);
+            $pastry = $this->pastryRepository->update($id, $request);
+            return response()->json($pastry, Response::HTTP_OK);
         } catch (QueryException $e) {
             return response()->json(['error' => 'Database error connection'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -69,7 +69,7 @@ class ClientService
     public function delete($id)
     {
         try {
-            $this->clientRepository->delete($id);
+            $this->pastryRepository->delete($id);
             return response()->json(null, Response::HTTP_OK);
         } catch (QueryException $e) {
             return response()->json(['error' => 'Database error connection'], Response::HTTP_INTERNAL_SERVER_ERROR);
