@@ -15,7 +15,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/api/pastries/getAll', 'PastriesController@getAll');
+$router->get('/api/pastries', 'PastriesController@getAll');
 
 $router->group(['prefix' => '/api/pastry'], function() use ($router) {
     $router->get('/{id}', "PastriesController@get");
@@ -24,7 +24,7 @@ $router->group(['prefix' => '/api/pastry'], function() use ($router) {
     $router->delete('/{id}', "PastriesController@delete");
 });
 
-$router->get('/api/clients/getAll', 'ClientsController@getAll');
+$router->get('/api/clients', 'ClientsController@getAll');
 
 $router->group(['prefix' => '/api/client'], function() use ($router) {
     $router->get('/{id}', "ClientsController@get");
