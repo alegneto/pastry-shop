@@ -19,6 +19,7 @@ class Pastries extends Migration
             $table->float('price');
             $table->string('picture', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

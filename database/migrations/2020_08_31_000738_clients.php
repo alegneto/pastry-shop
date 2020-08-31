@@ -24,6 +24,7 @@ class Clients extends Migration
             $table->string('district', 100);
             $table->string('zipcode', 8);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

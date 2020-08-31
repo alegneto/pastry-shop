@@ -37,7 +37,7 @@ $router->group(['prefix' => '/app/order'], function() use ($router) {
     $router->get('/{client_id}', 'OrdersController@get');
     $router->post('/{client_id}', 'OrdersController@store');
     $router->put('/{client_id}/{pastry_id}', 'OrdersController@update');
-    $router->delete('/{client_id}/{pastry_id}', 'OrdersController@destroy');
+    $router->delete('/{client_id}/{pastry_id}', 'OrdersController@delete');
 });
 
 $router->get('/app/checkout/{client_id}', 'CheckoutController@checkout');

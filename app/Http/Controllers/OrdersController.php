@@ -20,12 +20,12 @@ class OrdersController extends Controller
 
     }
 
-    public function add($client_id, $pastry_id)
+    public function store($client_id, Request $request)
     {
 
 	}
 
-	public function remove($client_id, $pastry_id)
+	public function update($client_id, Request $request)
 	{
 
     }

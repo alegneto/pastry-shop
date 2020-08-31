@@ -18,6 +18,7 @@ class Orders extends Migration
             $table->unsignedInteger('pastry_id');
             $table->unsignedInteger('quantity');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('pastry_id')->references('id')->on('pastries');
         });
