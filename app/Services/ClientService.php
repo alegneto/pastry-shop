@@ -6,6 +6,8 @@ use App\Repositories\ClientRepositoryInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Validation\Client as ValidationClient;
 
 class ClientService
 {
@@ -48,6 +50,15 @@ class ClientService
 
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            ValidationClient::RULES
+        );
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
         try {
             $client = $this->clientRepository->create($request);
             return response()->json($client, Response::HTTP_CREATED);
@@ -58,6 +69,15 @@ class ClientService
 
     public function update($id, Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            ValidationClient::RULES
+        );
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
         try {
             $client = $this->clientRepository->update($id, $request);
             return response()->json($client, Response::HTTP_OK);

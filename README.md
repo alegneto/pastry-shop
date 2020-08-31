@@ -1,24 +1,39 @@
-# Lumen PHP Framework
+# Pastelaria
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+API RESTFul para o gerenciamento de pedidos de uma pastelaria utilizando o framework Laravel/Lúmen.
+Back-end Challenge - Doc88
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Documentação
 
-## Official Documentation
+Faça o dowload do arquivo zip ou adicione o repositório através do git
+git remote add origin https://github.com/alegneto/pastry-shop.git
+git push -u origin master
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Acesse o diretorio através de terminal e utilizando o composer, digite o seginte comando:
+composer install
 
-## Contributing
+## Banco de dados
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+O projeto foi desenvolvido utilizando MySQL
+Criar database
+mysql > CREATE DATABASE pastry_shop
 
-## Security Vulnerabilities
+Copiar o arquivo .env.exemple e renomear para .env
+Altere as informações de usuário e senha do bando de dados configurados em seu database
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+No diretório da aplicação executar os seguintes comandos no terminal
+php artisan migrate
+php artisan db:seed
 
-## License
+## Aplicação
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Para executar a aplicação, ainda dentro do terminal, executar o seguinte comando
+php -S localhost:8000 -t public
+
+## API
+
+
+
+## Licença
+
+[MIT license](https://opensource.org/licenses/MIT).
