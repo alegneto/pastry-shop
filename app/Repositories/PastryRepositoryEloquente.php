@@ -32,13 +32,13 @@ class PastryRepositoryEloquente implements PastryRepositoryInterface
 
     public function update($id, Request $request)
     {
-        return $this->model->find($id)
-            ->update($request->all());
+        $pastry = $this->model->find($id);
+        return (!empty($pastry->id)) ? $pastry->update($request->all()) : 0;
     }
 
     public function delete($id)
     {
-        return $this->model->find($id)
-            ->delete();
+        $pastry = $this->model->find($id);
+        return (!empty($pastry) ? $pastry->delete() : null);
     }
 }

@@ -32,13 +32,13 @@ class ClientRepositoryEloquente implements ClientRepositoryInterface
 
     public function update($id, Request $request)
     {
-        return $this->model->find($id)
-            ->update($request->all());
+        $client = $this->model->find($id);
+        return (!empty($client->id)) ? $client->update($request->all()) : 0;
     }
 
     public function delete($id)
     {
-        return $this->model->find($id)
-            ->delete();
+        $client = $this->model->find($id);
+        return (!empty($client) ? $client->delete() : null);
     }
 }
