@@ -2,44 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ValidationException;
 use App\Services\PastryService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PastriesController extends Controller
 {
-    private $pastryService;
+    private $service;
 
     /**
      * Create a new controller instance.
      * @return void
      */
-    public function __construct(PastryService $pastryService)
+    public function __construct(PastryService $service)
     {
-        $this->pastryService = $pastryService;
+        $this->service = $service;
     }
 
     public function getAll()
     {
-        return $this->pastryService->getAll();
+        try {
+            return response()->json($this->service->getAll(), Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function get($id)
     {
-        return $this->pastryService->get($id);
+        try {
+            return response()->json($this->service->get($id), Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function store(Request $request)
     {
-        return $this->pastryService->store($request);
+        try {
+            return response()->json($this->service->store($request), Response::HTTP_CREATED);
+        } catch (ValidationException $e) {
+            return $this->error($e->getMessage(), Response::HTTP_BAD_REQUEST, $e->getDetails());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
 	}
 
 	public function update($id, Request $request)
 	{
-        return $this->pastryService->update($id, $request);
+        try {
+            return response()->json($this->service->update($id, $request), Response::HTTP_OK);
+        } catch (ValidationException $e) {
+            return $this->error($e->getMessage(), Response::HTTP_BAD_REQUEST, $e->getDetails());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function delete($id)
     {
-        return $this->pastryService->delete($id);
+        try {
+            return response()->json($this->service->delete($id), Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 }

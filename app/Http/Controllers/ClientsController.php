@@ -2,44 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ValidationException;
 use App\Services\ClientService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ClientsController extends Controller
 {
-    private $clientService;
+    private $service;
 
     /**
      * Create a new controller instance.
      * @return void
      */
-    public function __construct(ClientService $clientService)
+    public function __construct(ClientService $service)
     {
-        $this->clientService = $clientService;
+        $this->service = $service;
     }
 
     public function getAll()
     {
-        return $this->clientService->getAll();
+        try {
+            return response()->json($this->service->getAll(), Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function get($id)
     {
-        return $this->clientService->get($id);
+        try {
+            return response()->json($this->service->get($id), Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function store(Request $request)
     {
-        return $this->clientService->store($request);
+        try {
+            return response()->json($this->service->store($request), Response::HTTP_CREATED);
+        } catch (ValidationException $e) {
+            return $this->error($e->getMessage(), Response::HTTP_BAD_REQUEST, $e->getDetails());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
 	}
 
 	public function update($id, Request $request)
 	{
-        return $this->clientService->update($id, $request);
+        try {
+            return response()->json($this->service->update($id, $request), Response::HTTP_OK);
+        } catch (ValidationException $e) {
+            return $this->error($e->getMessage(), Response::HTTP_BAD_REQUEST, $e->getDetails());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function delete($id)
     {
-        return $this->clientService->delete($id);
+        try {
+            return response()->json($this->service->delete($id), Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 }
